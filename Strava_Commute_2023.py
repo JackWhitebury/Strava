@@ -48,6 +48,11 @@ if response.status_code == 200:
     total_savings = df['Carbon CO2 kg Saved'].sum()
     print(f"Total Carbon CO2 kg Saved: {total_savings} kg")
 
+    # Add a cell for "Total savings for the year" in Column I
+    with pd.ExcelWriter(excel_file_path, engine='openpyxl', mode='a') as writer:
+        total_savings_sheet = pd.DataFrame({'Total savings for the year': [total_savings]})
+        total_savings_sheet.to_excel(writer, sheet_name='Sheet1', startcol=8, index=False)
+
     print(f"Commute activities for {year} saved to {excel_file_path}")
 else:
     print(f"Error: {response.status_code}, {response.text}")
