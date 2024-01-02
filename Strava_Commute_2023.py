@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from datetime import datetime
+import sys
 
 # Read Strava access token from a file
 with open("strava_access_token.txt", "r") as token_file:
@@ -23,10 +24,14 @@ response = requests.get(activities_url, params=params)
 if response.status_code == 200:
     # Convert the response to JSON format
     activities_data = response.json()
+    print(f"Ttl number of activities found for year ({year}): %s" % len(activities_data))
 
     # Filter activities marked as "commute"
     commute_activities = [activity for activity in activities_data if activity.get('commute')]
-
+    if len(commute_activities) == 0:
+        print(f"No commute activities found for year ({year})")
+        sys.exit()
+    
     # Create a DataFrame using pandas
     df = pd.json_normalize(commute_activities)
 
