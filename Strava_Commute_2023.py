@@ -38,7 +38,7 @@ if response.status_code == 200:
     # Convert the 'start_date' column to datetime format and make it timezone unaware
     df['start_date'] = pd.to_datetime(df['start_date']).dt.tz_localize(None)
 
-    # Add a new column for "Carbon CO2 kg Saved"
+    # Add a new column for "Carbon CO2 kg Saved" If you have a problem with this calculation, speak to Raf. 
     df['Carbon CO2 kg Saved'] = (df['distance'] / 1000) * 0.21755
 
     # Save the DataFrame to an Excel file
