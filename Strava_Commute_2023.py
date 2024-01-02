@@ -38,7 +38,7 @@ if response.status_code == 200:
     df['start_date'] = pd.to_datetime(df['start_date']).dt.tz_localize(None)
 
     # Add a new column for "Carbon CO2 kg Saved"
-    df['Carbon CO2 kg Saved'] = (df['distance'] / 100) * 0.21755
+    df['Carbon CO2 kg Saved'] = (df['distance'] / 1000) * 0.21755
 
     # Save the DataFrame to an Excel file
     excel_file_path = f"strava_commute_activities_{year}.xlsx"
