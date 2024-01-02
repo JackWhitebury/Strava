@@ -1,3 +1,5 @@
+#Code will give you a spreadsheet containg c02 saved for all Strava activities in 2023 that are tagged as a commute 
+
 import requests
 import pandas as pd
 from datetime import datetime
