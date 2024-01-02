@@ -1,11 +1,10 @@
-#Code will give you a spreadsheet containg c02 saved for all Strava activities in 2023 that are tagged as a commute 
-
 import requests
 import pandas as pd
 from datetime import datetime
 
-# Set your Strava access token here
-strava_access_token = "*****"
+# Read Strava access token from a file
+with open("strava_access_token.txt", "r") as token_file:
+    strava_access_token = token_file.read().strip()
 
 # Set up parameters for Strava API request
 year = 2023
@@ -38,8 +37,8 @@ if response.status_code == 200:
     # Convert the 'start_date' column to datetime format and make it timezone unaware
     df['start_date'] = pd.to_datetime(df['start_date']).dt.tz_localize(None)
 
-    # Add a new column for "Carbon CO2 kg Saved" If you have a problem with this calculation, speak to Raf. 
-    df['Carbon CO2 kg Saved'] = (df['distance'] / 1000) * 0.21755
+    # Add a new column for "Carbon CO2 kg Saved"
+    df['Carbon CO2 kg Saved'] = (df['distance'] / 100) * 0.21755
 
     # Save the DataFrame to an Excel file
     excel_file_path = f"strava_commute_activities_{year}.xlsx"
