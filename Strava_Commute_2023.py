@@ -36,9 +36,16 @@ if response.status_code == 200:
     # Convert the 'start_date' column to datetime format and make it timezone unaware
     df['start_date'] = pd.to_datetime(df['start_date']).dt.tz_localize(None)
 
+    # Add a new column for "Carbon CO2 kg Saved"
+    df['Carbon CO2 kg Saved'] = (df['distance'] / 1000) * 0.21755
+
     # Save the DataFrame to an Excel file
     excel_file_path = f"strava_commute_activities_{year}.xlsx"
     df.to_excel(excel_file_path, index=False, engine='openpyxl')
+
+    # Calculate and print the total savings
+    total_savings = df['Carbon CO2 kg Saved'].sum()
+    print(f"Total Carbon CO2 kg Saved: {total_savings} kg")
 
     print(f"Commute activities for {year} saved to {excel_file_path}")
 else:
