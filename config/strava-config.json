@@ -1,0 +1,8 @@
+{
+    "access_token": "put your token here",
+    "client_id": "your id here",
+    "client_secret": "your secret here",
+    "expires_at": 1704303690,
+    "expires_in": 21600,
+    "refresh_token": "refresh token here"
+}
